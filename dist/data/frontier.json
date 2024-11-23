@@ -1,0 +1,10 @@
+{
+    "frontier": [
+      { "risk": 0.1, "return": 0.12 },
+      { "risk": 0.15, "return": 0.18 },
+      { "risk": 0.2, "return": 0.25 },
+      { "risk": 0.25, "return": 0.30 },
+      { "risk": 0.3, "return": 0.33 }
+    ]
+  }
+  
