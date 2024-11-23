@@ -1,1 +1,16 @@
+# Ignorar carpetas de control de Git y configuraciones de GitHub
+.git/
+.github/
+
+# Ignorar checkpoints de Jupyter Notebook
+.ipynb_checkpoints/
+
+# Ignorar dependencias de Node.js
+node_modules/
+
+# Ignorar carpetas personalizadas y de respaldos
+backups/
+herramientas/
+
+# Ignorar entornos virtuales de Python
 env/
