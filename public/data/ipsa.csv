@@ -1,0 +1,31 @@
+,Ticker,Nombre completo,Sector,Industria,Divisa,Precio actual,Capitalización de mercado,Beta,Rendimiento de dividendos,Última fecha de dividendos,País,Bolsa,Símbolo en la bolsa
+0,SOQUICOM.SN,Soquimich Comercial S.A.,Basic Materials,Agricultural Inputs,CLP,290.0,78913929216,-0.015,0.0353,1714953600,Chile,SGO,SOQUICOM.SN
+1,CHILE.SN,Banco de Chile,Financial Services,Banks - Regional,CLP,112.0,11313904353280,0.201,0.0696,1679270400,Chile,SGO,CHILE.SN
+2,BSANTANDER.SN,Banco Santander-Chile,Financial Services,Banks - Regional,CLP,46.8,8819272843264,0.549,0.039100002,1713484800,Chile,SGO,BSANTANDER.SN
+3,CENCOSUD.SN,Cencosud S.A.,Consumer Cyclical,Department Stores,CLP,1990.0,5583561818112,0.59,0.0104,1714953600,Chile,SGO,CENCOSUD.SN
+4,COPEC.SN,Empresas Copec S.A.,Industrials,Conglomerates,CLP,6080.0,7903087951872,0.715,0.0214,1733702400,Chile,SGO,COPEC.SN
+5,ENELAM.SN,Enel Américas S.A.,Utilities,Utilities - Regulated Electric,CLP,89.32,9582249246720,0.825,0.0753,1737936000,Chile,SGO,ENELAM.SN
+6,BCI.SN,Banco de Crédito e Inversiones,Financial Services,Banks - Regional,CLP,28000.0,6120911929344,0.286,0.0361,1712188800,Chile,SGO,BCI.SN
+7,CMPC.SN,Empresas CMPC S.A.,Basic Materials,Paper & Paper Products,CLP,1530.0,3824999989248,0.315,0.0533,1727049600,Chile,SGO,CMPC.SN
+8,FALABELLA.SN,Falabella S.A.,Consumer Cyclical,Department Stores,CLP,3365.0,8442246332416,No disponible,0.0064999997,1735862400,Chile,SGO,FALABELLA.SN
+9,ENELCHILE.SN,Enel Chile S.A.,Utilities,Utilities - Regulated Electric,CLP,51.5,3562079780864,0.717,0.1024,1737331200,Chile,SGO,ENELCHILE.SN
+10,COLBUN.SN,Colbún S.A.,Utilities,Utilities - Regulated Electric,CLP,119.75,2099960086528,0.26,0.081499994,1714953600,Chile,SGO,COLBUN.SN
+11,PARAUCO.SN,Parque Arauco S.A.,Real Estate,Real Estate - Diversified,CLP,1529.9,1385654910976,0.939,0.015700001,1715212800,Chile,SGO,PARAUCO.SN
+12,VAPORES.SN,Compañía Sud Americana de Vapores S.A.,Industrials,Marine Shipping,CLP,52.02,2669661126656,0.958,0.2224,1716163200,Chile,SGO,VAPORES.SN
+13,AGUAS-A.SN,Aguas Andinas S.A.,Utilities,Utilities - Regulated Water,CLP,304.56,1769807282176,0.369,0.070700005,1715558400,Chile,SGO,AGUAS-A.SN
+14,ANDINA-B.SN,Embotelladora Andina S.A.,Consumer Defensive,Beverages - Non-Alcoholic,CLP,2875.0,2353538269184,0.385,0.0471,1729468800,Chile,SGO,ANDINA-B.SN
+15,CCU.SN,Compañía Cervecerías Unidas S.A.,Consumer Defensive,Beverages - Brewers,CLP,5480.0,2024876539904,0.411,0.0366,1732492800,Chile,SGO,CCU.SN
+16,QUINENCO.SN,Quiñenco S.A.,Energy,Oil & Gas Refining & Marketing,CLP,3010.0,5004907249664,0.761,0.049000002,1714953600,Chile,SGO,QUINENCO.SN
+17,CENCOMALLS.SN,No disponible,Real Estate,Real Estate Services,CLP,1481.7,2527528222720,0.61,0.0744,1731628800,Chile,SGO,CENCOMALLS.SN
+18,LTM.SN,LATAM Airlines Group S.A.,Industrials,Airlines,CLP,13.15,7948359696384,1.744,0.0232,1590364800,Chile,SGO,LTM.SN
+19,CONCHATORO.SN,Viña Concha y Toro S.A.,Consumer Defensive,Beverages - Wineries & Distilleries,CLP,1060.0,783350562816,0.387,0.026199998,1727222400,Chile,SGO,CONCHATORO.SN
+20,ENTEL.SN,Empresa Nacional de Telecomunicaciones S.A.,Communication Services,Telecom Services,CLP,2980.0,900010606592,No disponible,0.0777,1714003200,Chile,SGO,ENTEL.SN
+21,MALLPLAZA.SN,Plaza S.A.,Real Estate,Real Estate Services,CLP,1605.0,3364625580032,No disponible,0.0255,1714003200,Chile,SGO,MALLPLAZA.SN
+22,CAP.SN,CAP S.A.,Basic Materials,Steel,CLP,5370.0,802535768064,1.461,No disponible,1681948800,Chile,SGO,CAP.SN
+23,ECL.SN,Engie Energia Chile S.A.,Utilities,Utilities - Regulated Electric,CLP,895.0,942712487936,0.301,No disponible,1629676800,Chile,SGO,ECL.SN
+24,ITAUCL.SN,Banco Itaú Chile,Financial Services,Banks - Regional,CLP,10170.0,2200187961344,0.958,0.0481,1714003200,Chile,SGO,ITAUCL.SN
+25,ORO-BLANCO.SN,Sociedad de Inversiones Oro Blanco S.A.,Financial Services,Capital Markets,CLP,3.9,828948873216,0.741,0.41979998,1715558400,Chile,SGO,ORO-BLANCO.SN
+26,IAM.SN,Inversiones Aguas Metropolitanas S.A.,Utilities,Utilities - Regulated Water,CLP,742.0,741999968256,0.411,0.0859,1715904000,Chile,SGO,IAM.SN
+27,SMU.SN,SMU S.A.,Consumer Cyclical,Department Stores,CLP,154.99,893240016896,0.394,0.0828,1732838400,Chile,SGO,SMU.SN
+28,RIPLEY.SN,Ripley Corp S.A.,Consumer Cyclical,Department Stores,CLP,267.01,516944756736,1.041,No disponible,1683849600,Chile,SGO,RIPLEY.SN
+29,SONDA.SN,Sonda S.A.,Technology,Information Technology Services,CLP,332.78,289870348288,0.659,0.0456,1725580800,Chile,SGO,SONDA.SN

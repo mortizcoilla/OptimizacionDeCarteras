@@ -12,7 +12,7 @@ const Datos = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await d3.csv("/src/assets/data/ipsa.csv", (d) => ({
+        const data = await d3.csv("/data/ipsa.csv", (d) => ({
           Ticker: d.Ticker,
           NombreCompleto: d["Nombre completo"],
           Sector: d.Sector,
