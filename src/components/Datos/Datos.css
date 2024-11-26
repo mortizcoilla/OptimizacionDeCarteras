@@ -99,13 +99,14 @@
 }
 
 .chart-column {
-  flex: 1; /* Cada columna ocupa el mismo espacio */
+  flex: 1;
   min-width: 300px; /* Ancho mínimo para cada columna */
   background: white;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-x: auto; /* Permitir scroll horizontal en caso de desbordamiento */
 }
 
 .chart-column h2 {
@@ -114,11 +115,15 @@
   text-align: center;
 }
 
-/* Tabla dentro de la gráfica */
-table {
-  width: 100%;
-  border-collapse: collapse;
+/* Estilo para tablas */
+.table-container {
+  overflow-x: auto; /* Scroll horizontal en dispositivos pequeños */
   margin-top: 1rem;
+}
+
+table {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  border-collapse: collapse;
   font-size: 0.95rem;
 }
 
@@ -136,6 +141,7 @@ table th {
 
 table td {
   color: #064469;
+  word-break: break-word; /* Ajustar texto largo */
 }
 
 /* Responsividad */
@@ -154,6 +160,14 @@ table td {
 
   table th,
   table td {
-    font-size: 0.85rem;
+    font-size: 0.85rem; /* Reducir tamaño de fuente */
+    padding: 6px;
   }
+}
+
+/* SVG Responsivo */
+svg {
+  display: block;
+  max-width: 100%; /* Asegurar que el SVG no desborde */
+  height: auto; /* Mantener la proporción */
 }

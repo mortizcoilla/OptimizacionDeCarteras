@@ -11,36 +11,38 @@ const TablaPorSector = ({ data }) => {
   return (
     <div className="chart-column">
       <h2>Acciones por Sector</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Sector</th>
-            <th>Cantidad</th>
-            <th>Acciones</th>
-            <th>Capitalización (M)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedData.map((sector, index) => (
-            <tr key={index}>
-              <td>{sector.sector}</td>
-              <td>{sector.cantidad}</td>
-              <td>
-                {sector.acciones
-                  .map((accion) => accion.replace(".SN", "")) // Eliminar el sufijo .SN
-                  .join(", ")}
-              </td>
-              <td>
-                {new Intl.NumberFormat("es-CL", {
-                  style: "currency",
-                  currency: "CLP",
-                }).format(sector.capitalizacion / 1e6)}{" "}
-                M
-              </td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Sector</th>
+              <th>Cantidad</th>
+              <th>Acciones</th>
+              <th>Capitalización (M)</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {sortedData.map((sector, index) => (
+              <tr key={index}>
+                <td>{sector.sector}</td>
+                <td>{sector.cantidad}</td>
+                <td>
+                  {sector.acciones
+                    .map((accion) => accion.replace(".SN", "")) // Eliminar sufijo .SN
+                    .join(", ")}
+                </td>
+                <td>
+                  {new Intl.NumberFormat("es-CL", {
+                    style: "currency",
+                    currency: "CLP",
+                  }).format(sector.capitalizacion / 1e6)}{" "}
+                  M
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

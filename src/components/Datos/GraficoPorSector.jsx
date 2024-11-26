@@ -1,15 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
 const GraficoPorSector = ({ data, onDrilldown }) => {
+  const svgRef = useRef();
+
   useEffect(() => {
     if (data && data.length > 0) {
-      const svg = d3.select("svg");
+      const svg = d3.select(svgRef.current);
       svg.selectAll("*").remove(); // Limpiar el gráfico previo
 
+      const containerWidth = svg.node().parentNode.clientWidth; // Ancho del contenedor
       const margin = { top: 30, right: 40, bottom: 80, left: 120 };
-      const width = +svg.attr("width") - margin.left - margin.right;
-      const height = +svg.attr("height") - margin.top - margin.bottom;
+      const width = containerWidth - margin.left - margin.right;
+      const height = 400;
+
+      svg.attr("viewBox", `0 0 ${containerWidth} ${height + margin.top + margin.bottom}`)
+        .attr("preserveAspectRatio", "xMinYMin meet");
 
       // Calcular el total de la capitalización
       const total = d3.sum(data, (d) => d.value);
@@ -89,7 +95,7 @@ const GraficoPorSector = ({ data, onDrilldown }) => {
   return (
     <div className="chart-column">
       <h2>Distribución de Capitalización por Sector (%)</h2>
-      <svg width="800" height="500"></svg>
+      <svg ref={svgRef} width="100%" height="400"></svg>
     </div>
   );
 };
