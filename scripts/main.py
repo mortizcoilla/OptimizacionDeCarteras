@@ -11,19 +11,94 @@ from pypfopt import expected_returns
 import cvxpy as cp
 from scipy.optimize import minimize
 
-# Lista de tickers de las empresas IPSA
+import pandas as pd
+import numpy as np
+import yfinance as yf
 
-tickers =  ["SQM","BCH","BSANTANDER.SN","CENCOSUD.SN","COPEC.SN","ENELAM.SN","BCI.SN","CMPC.SN","FALABELLA.SN","ENELCHILE.SN",
-            "COLBUN.SN","PARAUCO.SN","VAPORES.SN","AGUAS-A.SN","ANDINA-B.SN","CCU.SN","QUINENCO.SN","CENCOSHOPP.SN","LTM.SN",
-            "CONCHATORO.SN","ENTEL.SN","MALLPLAZA.SN","CAP.SN","ECL.SN","ITAUCL.SN","ORO-BLANCO.SN","IAM.SN","SMU.SN","RIPLEY.SN",
-            "SONDA.SN"]
 
-# Definimos la fecha de inicio y fin para los últimos 5 años
+# Definir tickers y rango de fechas
+tickers = [
+    "AGUAS-A.SN", "ANDINA-B.SN", "CAP.SN", "CCU.SN", "CENCOMALLS.SN", 
+    "CENCOSUD.SN", "CMPC.SN", "COLBUN.SN", "CONCHATORO.SN", "COPEC.SN", 
+    "ENELAM.SN", "ENELCHILE.SN", "ENTEL.SN", "FALABELLA.SN", "IAM.SN", 
+    "LTM.SN", "MALLPLAZA.SN", "PARAUCO.SN", "QUINENCO.SN", "RIPLEY.SN", 
+    "SMU.SN", "SQM-B.SN", "VAPORES.SN", "18SEP.SN", "ABC.SN", "ADRETAIL.SN", 
+    "AESANDES.SN", "AGROSUPER.SN", "AGUAS-ANTOF.SN", "AGUASALT.SN", 
+    "AGUASARA.SN", "AGUASMAG.SN", "AGUSTINAS.SN", "ALFATRAN.SN", 
+    "ALGARROBO.SN", "ALMENDRAL.SN", "ALPHA.SN", "AMERICANA.SN", "AMOVIL.SN", 
+    "ANDACOR.SN", "ANTAR.SN", "AQUACHILE.SN", "ARAUCO.SN", "ARRAYAN.SN", 
+    "AUDAX.SN", "AUTMOTUR.SN", "AUTOFIN.SN", "AZULAZUL.SN", "BAIH.SN", 
+    "BANAGRO.SN", "BANMEDICA.SN", "BANVIDA.SN", "BCISEC.SN", "BELLAVISTA.SN", 
+    "BESALCO.SN", "BETLAN.SN", "BICECORP.SN", "BICESEC.SN", "BK.SN", 
+    "BLUMAR.SN", "BOLSASTGO.SN", "BYN.SN", "CABOFROW.SN", "CACHAGUA.SN", 
+    "CAMANCHACA.SN", "CAMPOS.SN", "CAPITAL.SN", "CAROZZI.SN", "CASABLANCA.SN", 
+    "CASAITALIA.SN", "CASCADA.SN", "CDA.SN", "CEL.SN", "CELEORES.SN", 
+    "CEMENTOS.SN", "CGE.SN", "CGETRAN.SN", "CHILQUINTA.SN", "CIC.SN", 
+    "CINTAC.SN", "CLUBCON.SN", "COAGRA.SN", "COCHRANE.SN", "CODELCO.SN", 
+    "COF.SN", "COLOCOLO.SN", "COMERCIAL.SN", "COMVAL.SN", "CONFIN.SN", 
+    "CONFUTURO.SN", "COPEVAL.SN", "COPSA.SN", "CORPGAR.SN", "CORREOS.SN", 
+    "COSTANERA.SN", "COVADONGA.SN", "CRAIGH.SN", "CRISTAL.SN", "CROATA.SN", 
+    "CRUZADOS.SN", "CUPRUM.SN", "DEPMANQ.SN", "DEPORTAL.SN", "DEPPAL.SN", 
+    "DEPUNESP.SN", "DREAMS.SN", "DUNCAN.SN", "ECHEVERRIA.SN", "EDELMAG.SN", 
+    "EFE.SN", "EFSEC.SN", "ELATINA.SN", "ELECMETAL.SN", "EMBONOR-B.SN", 
+    "EMILIANA.SN", "ENAER.SN", "ENAEX.SN", "ENAP.SN", "ENELDISTR.SN", 
+    "ENELGXCH.SN", "ENGIE.SN", "ENJOY.SN", "ENLASA.SN", "ENVAPAC.SN", 
+    "ESMAX.SN", "ESPACON.SN", "ESPACUR.SN", "ESPAVAL.SN", "ESPERANZA.SN", 
+    "ESSBIO.SN", "ESTESP.SN", "ESVAL.SN", "EUROCAP.SN", "FACTORSEC.SN", 
+    "FACTOTAL.SN", "FEPASA.SN", "FERIA.SN", "FINTESEC.SN", "FMIRANDA.SN", 
+    "FORESTAL.SN", "FORUM.SN", "FORUS.SN", "FOSFOROS.SN", "FRONTERA.SN", 
+    "GAMA.SN", "GASCO.SN", "GEN.SN", "GEO.SN", "GLOBAL.SN", "GMFCHILE.SN", 
+    "GOLDMAN.SN", "GOLFCHI.SN", "GOLFSANTIAGO.SN", "GOLFSE.SN", "GRANADILLA.SN", 
+    "GTD.SN", "HABITAT.SN", "HACIENDA.SN", "HBRE.SN", "HIPARICA.SN", 
+    "HIPCON.SN", "HIPERMARC.SN", "HIPODROMO.SN", "HIPPTA.SN", "HIPSAN.SN", 
+    "HISPANIA.SN", "HITES.SN", "HORTIFRUT.SN", "HUINGANAL.SN", "IANSA.SN", 
+    "ILC.SN", "INCOFIN.SN", "INDISA.SN", "INDIVER.SN", "INFMER.SN", 
+    "INFODEMA.SN", "INGEVEC.SN", "INGLES.SN", "INMOVINA.SN", "INVELSUR.SN", 
+    "INVERCAP.SN", "INVERNOVA.SN", "INVERSIONESCMPC.SN", "INVEUNESP.SN", 
+    "IPAL.SN", "ISRAELITA.SN", "ITALIANA.SN", "JUGOS.SN", "LAARAUCANA.SN", 
+    "LADEHESA.SN", "LAESPA.SN", "LAFOREST.SN", "LAGOPEN.SN", "LAPOSADA.SN", 
+    "LAREINA.SN", "LAREPUBLICA.SN", "LAROSA.SN", "LASBRISAS.SN", 
+    "LASCONDES.SN", "LASVIZCACHAS.SN", "LDAVINCI.SN", "LENGA.SN", 
+    "LIBANESA.SN", "LIF.SN", "LIPIGAS.SN", "LIRIOS.SN", "LLACOLEN.SN", 
+    "LOMAS.SN", "LOSANDES.SN", "LOSHEROES.SN", "LOSVASCOS.SN", "LQIF.SN", 
+    "LTRAN.SN", "MAISON.SN", "MALLVINA.SN", "MANQUEHUE.SN", "MARBELLA.SN", 
+    "MARINSA.SN", "MASISA.SN", "MELIPILLA.SN", "MELON.SN", "METRO.SN", 
+    "METROGAS.SN", "MODELO.SN", "MOLLER.SN", "MOLYMET.SN", "MULTIEXPORT.SN", 
+    "MVALP.SN", "NAVARINO.SN", "NEXUS.SN", "NIALEM.SN", "NIBSA.SN", 
+    "NITRATOS.SN", "NORSUR.SN", "NORTEG.SN", "NTGCLGAS.SN", "NUEVAATAC.SN", 
+    "NUEVAREGION.SN", "NUEVOSUR.SN", "NUTRAVALOR.SN", "OGC.SN", "OLIVETO.SN", 
+    "ORO BLANCO.SN", "ORPI.SN", "OXIQUIM.SN", "PALESTINO.SN", "PAMPA.SN", 
+    "PAPUDO.SN", "PATIOCOM.SN", "PAZ.SN", "PEHUENCHE.SN", "PENTA.SN", 
+    "PLANVITAL.SN", "POLPAICO.SN", "POTASIOS.SN", "POW.SN", "PREVSEC.SN", 
+    "PRIMUS.SN", "PROGRESO.SN", "PROVIDA.SN", "PUNBLAN.SN", "PUNTA.SN", 
+    "PUNTILLA.SN", "PVALDIVIA.SN", "QUEMCHI.SN", "QUILICURA.SN", "REBRISA.SN", 
+    "RECUDE.SN", "REDMEGA.SN", "REDSALUD.SN", "REFUGIO.SN", "RIPLEYCORP.SN", 
+    "ROCAS.SN", "RUTALGAR.SN", "RUTALIMARI.SN", "RUTALOA.SN", "RUTAMAI.SN", 
+    "RYDBAKER.SN", "SAAM.SN", "SADIA.SN", "SAESA.SN", "SALFACORP.SN", 
+    "SALMOCAM.SN", "SALUDXXI.SN", "SANAGUSTIN.SN", "SANCRI.SN", "SANPAT.SN", 
+    "SANTALUCIA.SN", "BSANTANDER.SN", "SANTANDERSEC.SN", "SANTAROSA.SN", 
+    "SCHWAGER.SN", "SECPREVI.SN", "SECSEC.SN", "SECURITY.SN", "SIAC.SN", 
+    "SIEMEL.SN", "SIRIO.SN", "SIXTERRA.SN", "SK.SN", "SOCOVESA.SN", 
+    "SODIMAC.SN", "SONACOL.SN", "SONDA.SN", "SOPROCAL.SN", "SOPROLE.SN", 
+    "SOQUICOM.SN", "SOUTHWATER.SN", "SPORTFR.SN", "SRC.SN", "STADITAL.SN", 
+    "STADITALIANO.SN", "STMARG.SN", "STS.SN", "SUDQUILLOTA.SN", "SUDSEC.SN", 
+    "SURALIS.SN", "SWANDERERS.SN", "TANNER.SN", "TECNOFAST.SN", 
+]
 end_date = pd.Timestamp.today()
-start_date = end_date - pd.DateOffset(years=5)
+start_date = end_date - pd.DateOffset(years=10)
 
-# Descargamos los datos
+# Descargar datos de Yahoo Finance
 data = yf.download(tickers, start=start_date, end=end_date, interval="1wk")
 
-# Seleccionamos solo el 'Adj Close' que es el precio de cierre ajustado
-prices = data['Adj Close']
+# Seleccionamos solo el 'Adj Close' y creamos una copia para trabajar en ella
+prices = data['Adj Close'].copy()
+
+# Ordenar datos por fecha
+prices.sort_index(inplace=True)
+
+# Ruta donde se desea guardar el archivo
+output_file = "./src/assets/data/prices.csv"
+
+# Guardar el archivo CSV
+prices.to_csv(output_file)
+

@@ -1,0 +1,159 @@
+/* Estilo general de la sección de datos */
+.datos-section {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  color: #064469;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+}
+
+/* Hero section: Título y descripción inicial */
+.hero-datos {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero-datos h1 {
+  font-size: 2.5rem;
+  color: #02457a;
+  margin-bottom: 1rem;
+}
+
+.hero-datos p {
+  font-size: 1.2rem;
+  color: #4a4a4a;
+  line-height: 1.8;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+/* Explicación del IPSA y Yahoo Finance */
+.explanation {
+  background-color: #eaf4fc;
+  border-left: 5px solid #02457a;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+}
+
+.explanation h2 {
+  font-size: 1.5rem;
+  color: #02457a;
+  margin-bottom: 1rem;
+}
+
+.explanation p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+/* Estilo para la sección de pasos */
+.steps {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.steps h2 {
+  font-size: 1.5rem;
+  color: #02457a;
+  margin-bottom: 1.5rem;
+}
+
+.steps ol {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style-type: decimal;
+}
+
+.steps li {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.steps ul {
+  margin-left: 1rem;
+  list-style-type: disc;
+}
+
+.steps ul li {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Botón de carga */
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #4a4a4a;
+}
+
+/* Estilo de las gráficas */
+.chart-row {
+  display: flex;
+  flex-wrap: wrap; /* Responsivo */
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.chart-column {
+  flex: 1; /* Cada columna ocupa el mismo espacio */
+  min-width: 300px; /* Ancho mínimo para cada columna */
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart-column h2 {
+  margin-bottom: 1rem;
+  color: #02457a;
+  text-align: center;
+}
+
+/* Tabla dentro de la gráfica */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #02457a;
+  color: white;
+}
+
+table td {
+  color: #064469;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .chart-row {
+    flex-direction: column; /* Las columnas se apilan verticalmente */
+  }
+
+  .hero-datos h1 {
+    font-size: 2rem;
+  }
+
+  .hero-datos p {
+    font-size: 1rem;
+  }
+
+  table th,
+  table td {
+    font-size: 0.85rem;
+  }
+}
