@@ -1,4 +1,6 @@
 {
+  "buildCommand": "echo 'sitio estatico — sin build'",
+  "outputDirectory": ".",
   "cleanUrls": true,
   "headers": [
     {
