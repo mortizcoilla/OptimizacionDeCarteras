@@ -1,0 +1,9 @@
+# robots.txt — Optimización de Carteras (Paper 1)
+# https://mortizcoilla.vercel.app/
+
+User-agent: *
+Allow: /
+Disallow: /data/processed/
+Disallow: /scripts/
+
+Sitemap: https://mortizcoilla.vercel.app/sitemap.xml

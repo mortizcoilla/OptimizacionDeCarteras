@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Paper preview">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EBEBED"/>
+      <stop offset="1" stop-color="#DCDDDF"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#081630" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Eyebrow -->
+  <text x="80" y="120" font-family="JetBrains Mono, monospace" font-size="20" letter-spacing="3" fill="#3B878C" font-weight="600">WORKING PAPER · OPTIMIZACIÓN DE CARTERAS</text>
+
+  <!-- Título principal -->
+  <text x="80" y="200" font-family="Inter, system-ui, sans-serif" font-size="58" font-weight="800" fill="#081630" letter-spacing="-1">Estrategias de construcción</text>
+  <text x="80" y="270" font-family="Inter, system-ui, sans-serif" font-size="58" font-weight="800" fill="#081630" letter-spacing="-1">de portafolios en el IPSA,</text>
+  <text x="80" y="340" font-family="Inter, system-ui, sans-serif" font-size="58" font-weight="800" fill="#081630" letter-spacing="-1">2010–2024</text>
+
+  <!-- Subtitle -->
+  <text x="80" y="400" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#081630" opacity="0.75">Backtest de 6 estrategias sobre 30 acciones del IPSA</text>
+  <text x="80" y="430" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#081630" opacity="0.75">en 14 años con cuatro crisis locales.</text>
+
+  <!-- Author footer -->
+  <text x="80" y="560" font-family="JetBrains Mono, monospace" font-size="18" fill="#125358" font-weight="500">Miguel Ortiz C. · Julio 2026</text>
+
+  <!-- Mini equity curve bottom-right -->
+  <g transform="translate(700, 380)">
+    <rect x="0" y="0" width="420" height="200" fill="#FFFDFC" stroke="#C2C3C5" stroke-width="1" rx="6"/>
+    <text x="14" y="22" font-family="JetBrains Mono, monospace" font-size="11" fill="#3B878C" font-weight="600">EQUITY · BASE 100</text>
+    <!-- Mini chart: línea teal + área drawdown -->
+    <path d="M 14 160 L 40 158 L 70 152 L 100 145 L 130 150 L 160 142 L 190 138 L 220 130 L 250 128 L 280 132 L 310 90 L 340 95 L 370 80 L 400 70"
+          fill="none" stroke="#3B878C" stroke-width="2.5"/>
+    <path d="M 310 90 L 310 175 L 340 175 L 340 95 Z" fill="#A04545" fill-opacity="0.18"/>
+    <path d="M 310 90 L 340 95" stroke="#A04545" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <line x1="310" y1="90" x2="310" y2="178" stroke="#A04545" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+    <text x="14" y="190" font-family="JetBrains Mono, monospace" font-size="10" fill="#125358">2010</text>
+    <text x="395" y="190" font-family="JetBrains Mono, monospace" font-size="10" fill="#125358" text-anchor="end">2024</text>
+  </g>
+</svg>

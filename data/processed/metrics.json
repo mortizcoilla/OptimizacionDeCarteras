@@ -1,0 +1,148 @@
+{
+  "E1_EqualWeight": {
+    "label": "1/N",
+    "n_days": 1369,
+    "ann_return": 0.0734339374017623,
+    "ann_volatility": 0.21545350399056834,
+    "sharpe": 0.15517936251909784,
+    "sortino": 0.18816928096671862,
+    "max_drawdown": -0.4609353606758636,
+    "calmar": 0.1593150442918657,
+    "pct_positive_months": 0.6060606060606061,
+    "final_value_base100": 146.9562822189388
+  },
+  "E2_CapWeighted": {
+    "label": "IPSA cap-weighted",
+    "n_days": 1369,
+    "ann_return": 0.08660685725404771,
+    "ann_volatility": 0.2628388176910963,
+    "sharpe": 0.17732105806693607,
+    "sortino": 0.23632930648548717,
+    "max_drawdown": -0.48419021704197934,
+    "calmar": 0.1788694901420094,
+    "pct_positive_months": 0.5606060606060606,
+    "final_value_base100": 157.02361425314086
+  },
+  "E3_MinVariance": {
+    "label": "Markowitz min-var",
+    "n_days": 1369,
+    "ann_return": 0.0649392690857502,
+    "ann_volatility": 0.17402029004302816,
+    "sharpe": 0.14331242109517078,
+    "sortino": 0.17124957141854213,
+    "max_drawdown": -0.41602889642716245,
+    "calmar": 0.15609316959337619,
+    "pct_positive_months": 0.5151515151515151,
+    "final_value_base100": 140.74834178188297
+  },
+  "E4_MaxSharpe": {
+    "label": "Markowitz max-Sharpe",
+    "n_days": 1369,
+    "ann_return": 0.13571900534186576,
+    "ann_volatility": 0.4560938408718555,
+    "sharpe": 0.2098669106315756,
+    "sortino": 0.22841592866026325,
+    "max_drawdown": -0.8275517053750248,
+    "calmar": 0.1640006351994181,
+    "pct_positive_months": 0.5151515151515151,
+    "final_value_base100": 199.64632566638
+  },
+  "E5_RiskParity": {
+    "label": "Qian ERC",
+    "n_days": 1369,
+    "ann_return": 0.023545988273252938,
+    "ann_volatility": 0.20608913696909203,
+    "sharpe": -0.07983929657202035,
+    "sortino": -0.09437861152280741,
+    "max_drawdown": -0.4609353606758638,
+    "calmar": 0.05108305910557122,
+    "pct_positive_months": 0.5606060606060606,
+    "final_value_base100": 113.47720664484245
+  },
+  "E6_MaxDiversification": {
+    "label": "Choueifaty max-div",
+    "n_days": 1369,
+    "ann_return": 0.10879633799934374,
+    "ann_volatility": 0.19777773453263647,
+    "sharpe": 0.3478467288641697,
+    "sortino": 0.4267757335219867,
+    "max_drawdown": -0.42279495646523296,
+    "calmar": 0.25732648021379656,
+    "pct_positive_months": 0.6212121212121212,
+    "final_value_base100": 175.25042934733995
+  },
+  "regime_returns": {
+    "E1_EqualWeight": [
+      {
+        "regime": "2019-2021",
+        "ann_return": -0.10374891650119733,
+        "days": 624
+      },
+      {
+        "regime": "2022-2024",
+        "ann_return": 0.2485224553503571,
+        "days": 745
+      }
+    ],
+    "E2_CapWeighted": [
+      {
+        "regime": "2019-2021",
+        "ann_return": -0.10764490931550474,
+        "days": 624
+      },
+      {
+        "regime": "2022-2024",
+        "ann_return": 0.2814892236066857,
+        "days": 745
+      }
+    ],
+    "E3_MinVariance": [
+      {
+        "regime": "2019-2021",
+        "ann_return": -0.047607962429249695,
+        "days": 624
+      },
+      {
+        "regime": "2022-2024",
+        "ann_return": 0.1693789469029059,
+        "days": 745
+      }
+    ],
+    "E4_MaxSharpe": [
+      {
+        "regime": "2019-2021",
+        "ann_return": -0.04872437739399749,
+        "days": 624
+      },
+      {
+        "regime": "2022-2024",
+        "ann_return": 0.31745302954471843,
+        "days": 745
+      }
+    ],
+    "E5_RiskParity": [
+      {
+        "regime": "2019-2021",
+        "ann_return": -0.10121467006684726,
+        "days": 624
+      },
+      {
+        "regime": "2022-2024",
+        "ann_return": 0.14127454646678905,
+        "days": 745
+      }
+    ],
+    "E6_MaxDiversification": [
+      {
+        "regime": "2019-2021",
+        "ann_return": -0.05706154358856008,
+        "days": 624
+      },
+      {
+        "regime": "2022-2024",
+        "ann_return": 0.26996353317160415,
+        "days": 745
+      }
+    ]
+  }
+}

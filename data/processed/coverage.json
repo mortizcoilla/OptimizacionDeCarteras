@@ -1,0 +1,190 @@
+{
+  "rows_total": 3735,
+  "rows_dropped_low_coverage": 0,
+  "date_min": "2010-01-04",
+  "date_max": "2024-12-30",
+  "na_filled": 0,
+  "ffill_limit_days": 5,
+  "per_ticker_coverage": {
+    "AGUAS-A.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "ANDINA-B.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "BCI.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "BSANTANDER.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "CAP.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "CCU.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "CENCOMALLS.SN": {
+      "rows_with_data": 1370,
+      "coverage_pct": 36.68,
+      "first": "2019-06-28",
+      "last": "2024-12-30"
+    },
+    "CENCOSUD.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "CHILE.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "CMPC.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "COLBUN.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "CONCHATORO.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "COPEC.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "ECL.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "ENELAM.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "ENELCHILE.SN": {
+      "rows_with_data": 2161,
+      "coverage_pct": 57.86,
+      "first": "2016-04-21",
+      "last": "2024-12-30"
+    },
+    "ENTEL.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "FALABELLA.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "IAM.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "ITAUCL.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "LTM.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "MALLPLAZA.SN": {
+      "rows_with_data": 1597,
+      "coverage_pct": 42.76,
+      "first": "2018-07-27",
+      "last": "2024-12-30"
+    },
+    "ORO-BLANCO.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "PARAUCO.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "QUINENCO.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "RIPLEY.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "SMU.SN": {
+      "rows_with_data": 1971,
+      "coverage_pct": 52.77,
+      "first": "2017-01-24",
+      "last": "2024-12-30"
+    },
+    "SONDA.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "SOQUICOM.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    },
+    "VAPORES.SN": {
+      "rows_with_data": 3735,
+      "coverage_pct": 100.0,
+      "first": "2010-01-04",
+      "last": "2024-12-30"
+    }
+  }
+}

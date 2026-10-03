@@ -1,0 +1,34 @@
+{
+  "project": "Optimización de Carteras de Inversión",
+  "paper": "Paper 1 — Backtest de estrategias en el IPSA 2010-2024",
+  "version": "0.1.0",
+  "buildDateUtc": "2026-07-28T03:07:09.365134+00:00",
+  "dataSource": "Yahoo Finance via yfinance (Adj Close — precios ajustados por dividendos y splits)",
+  "compositionSource": "Bolsa de Santiago / cartola oficial del IPSA",
+  "scriptVersion": "scripts/build_data.py (rev. 2026-07-27)",
+  "period": {
+    "requested": {
+      "start": "2010-01-01",
+      "end": "2024-12-31"
+    },
+    "actual": {
+      "start": "2010-01-04",
+      "end": "2024-12-30"
+    },
+    "tradingDays": 3735
+  },
+  "universeSize": 30,
+  "conventions": {
+    "currency": "CLP nominal (sin ajuste por inflación)",
+    "tickerFormat": "Yahoo Finance (.SN = Santiago Exchange)",
+    "naPolicy": "forward fill hasta 5 días; filas con <50% de cobertura eliminadas",
+    "rebalanceFrequency": "monthly (definido en motor, no en datos)",
+    "transactionCost": "10 bps por rebalanceo (assumption del paper, no en datos)"
+  },
+  "disclaimers": [
+    "Backtest histórico. Desempeño pasado no garantiza resultados futuros.",
+    "Sesgo de supervivencia: se usa la composición actual del IPSA. Activos que salieron del índice durante 2010-2024 no están representados.",
+    "Costos de transacción asumidos, no modelados con spread ni impacto.",
+    "No se considera apalancamiento, short-selling, costos fiscales ni de custodia."
+  ]
+}

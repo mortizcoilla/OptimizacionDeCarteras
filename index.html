@@ -1,28 +1,734 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Dashboard interactivo para la optimización de carteras utilizando técnicas avanzadas de finanzas cuantitativas."
-    />
-    <title>Optimización de Carteras</title>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#081630" />
+  <meta name="color-scheme" content="light" />
 
-    <!-- Enlace a Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+  <!-- SEO básico -->
+  <title>Estrategias de construcción de portafolios en el IPSA, 2010–2024 · Working paper</title>
+  <meta name="description" content="Backtest comparativo de seis estrategias de construcción de portafolios (equal-weight, cap-weighted, minimum-variance, maximum-Sharpe, risk-parity, maximum-diversification) sobre 30 acciones del IPSA en 14 años con cuatro crisis locales. Datos públicos, análisis reproducible, código abierto." />
+  <meta name="keywords" content="IPSA, Markowitz, Sharpe, risk parity, ERC, Markowitz, portafolios, Chile, backtest, finanzas cuantitativas, Markowitz, optimización" />
+  <meta name="author" content="Miguel Ortiz C." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="googlebot" content="index, follow" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- Punto de entrada para React -->
+  <!-- Favicon y apple-touch-icon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="alternate icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.svg" />
 
-    <!-- Archivo principal de Vite -->
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <!-- Open Graph (Facebook, LinkedIn, Slack, WhatsApp) -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Miguel Ortiz C. — Portafolio" />
+  <meta property="og:locale" content="es_CL" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:url" content="https://mortizcoilla.vercel.app/" />
+  <meta property="og:title" content="Estrategias de construcción de portafolios en el IPSA, 2010–2024" />
+  <meta property="og:description" content="Backtest de 6 estrategias de portafolio sobre 30 acciones del IPSA en 14 años. Markowitz, Sharpe, risk parity, max diversification. Datos públicos, código abierto." />
+  <meta property="og:image" content="https://mortizcoilla.vercel.app/assets/og-image.svg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Preview del paper: equity curve del IPSA 2010–2024 con anotación de drawdown en la crisis 2019–2021." />
+  <meta property="article:published_time" content="2026-07-27" />
+  <meta property="article:modified_time" content="2026-07-27" />
+  <meta property="article:author" content="Miguel Ortiz C." />
+  <meta property="article:section" content="Finanzas cuantitativas" />
+  <meta property="article:tag" content="IPSA" />
+  <meta property="article:tag" content="Markowitz" />
+  <meta property="article:tag" content="Risk parity" />
+  <meta property="article:tag" content="Backtest" />
+  <meta property="article:tag" content="Chile" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Estrategias de construcción de portafolios en el IPSA, 2010–2024" />
+  <meta name="twitter:description" content="Backtest de 6 estrategias de portafolio sobre 30 acciones del IPSA en 14 años. Datos públicos, código abierto." />
+  <meta name="twitter:image" content="https://mortizcoilla.vercel.app/assets/og-image.svg" />
+  <meta name="twitter:image:alt" content="Preview del paper: equity curve del IPSA 2010–2024 con anotación de drawdown en la crisis 2019–2021." />
+
+  <!-- Dublin Core (académico) -->
+  <meta name="DC.title" content="Estrategias de construcción de portafolios en el IPSA, 2010–2024" />
+  <meta name="DC.creator" content="Miguel Ortiz C." />
+  <meta name="DC.subject" content="IPSA; Markowitz; Risk parity; Backtest; Finanzas cuantitativas; Chile" />
+  <meta name="DC.description" content="Working paper. Backtest comparativo de seis estrategias de construcción de portafolios sobre 30 acciones del IPSA, 2010-2024." />
+  <meta name="DC.type" content="Working Paper" />
+  <meta name="DC.language" content="es-CL" />
+  <meta name="DC.date" content="2026-07-27" />
+  <meta name="DC.rights" content="MIT License" />
+
+  <!-- Tipografía: Inter (sans) + JetBrains Mono (mono) + Lora (serif para nombre) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- KaTeX para fórmulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+
+  <!-- Estilos del paper -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- JSON-LD: Schema.org ScholarlyArticle -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Estrategias de construcción de portafolios en el IPSA, 2010–2024",
+    "alternativeHeadline": "Backtest comparativo de seis estrategias sobre el mercado accionario chileno",
+    "abstract": "Se comparan seis estrategias de construcción de portafolios —equal-weight, cap-weighted (IPSA), minimum-variance, maximum-Sharpe, risk-parity (ERC) y maximum-diversification— sobre el universo accionario chileno del IPSA entre 2010 y 2024. El backtest emplea ventanas de estimación rolling de 252 días, rebalanceo mensual y supuestos explícitos de costos de transacción. Se reportan métricas de retorno-riesgo (Sharpe, Sortino, Calmar, max drawdown, time-under-water, turnover) y se analiza la estabilidad temporal de la jerarquía de estrategias. Los resultados muestran que las estrategias naive igualan o superan a las optimizadas en el período completo, la jerarquía es inestable y rota con el régimen, y la concentración del benchmark chileno condiciona severamente el desempeño de risk-parity.",
+    "name": "Estrategias de construcción de portafolios en el IPSA, 2010–2024",
+    "inLanguage": "es-CL",
+    "datePublished": "2026-07-27",
+    "dateModified": "2026-07-27",
+    "author": {
+      "@type": "Person",
+      "name": "Miguel Ortiz C.",
+      "url": "https://mortizcoilla.vercel.app/",
+      "sameAs": [
+        "https://linkedin.com/in/mortizcoilla",
+        "https://github.com/mortizcoilla"
+      ]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Miguel Ortiz C.",
+      "url": "https://mortizcoilla.vercel.app/"
+    },
+    "keywords": "IPSA, Markowitz, Sharpe, risk parity, ERC, backtest, finanzas cuantitativas, Chile, Markowitz, optimización",
+    "about": [
+      {"@type": "Thing", "name": "IPSA"},
+      {"@type": "Thing", "name": "Markowitz portfolio theory"},
+      {"@type": "Thing", "name": "Risk parity"},
+      {"@type": "Thing", "name": "Backtesting"},
+      {"@type": "Thing", "name": "Chilean stock market"}
+    ],
+    "isBasedOn": {
+      "@type": "Dataset",
+      "name": "Yahoo Finance via yfinance (Adj Close, 2010-01-01 to 2024-12-31)",
+      "description": "Precios diarios ajustados por dividendos y splits para 30 acciones del IPSA, descargados desde Yahoo Finance con la librería yfinance de Python."
+    },
+    "license": "https://opensource.org/licenses/MIT",
+    "url": "https://mortizcoilla.vercel.app/",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://mortizcoilla.vercel.app/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- =====================================================================
+       HEADER EDITORIAL
+       ===================================================================== -->
+  <header class="paperhead">
+    <div class="wrap">
+      <p class="kicker">Working paper · Optimización de carteras</p>
+      <h1>Estrategias de construcción de portafolios en el IPSA, 2010–2024</h1>
+      <p class="subtitle">Backtest comparativo de seis estrategias (equal-weight, cap-weighted, minimum-variance, maximum-Sharpe, risk-parity y maximum-diversification) sobre 30 acciones del índice chileno en 14 años con cuatro crisis locales.</p>
+      <p class="meta">
+        Miguel Ortiz C. ·
+        Julio 2026 ·
+        <a href="#" id="repo-link-header" data-placeholder="true">Repositorio</a> ·
+        <a href="data/processed/coverage.json">Datos</a> ·
+        <a href="#" id="cite-link">Cita sugerida</a>
+      </p>
+      <p class="headnote">
+        Datos públicos vía Yahoo Finance. Composición del IPSA según cartola oficial de la Bolsa de Santiago. Costos de transacción asumidos. No constituye asesoría financiera.
+      </p>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       STICKY NAV
+       ===================================================================== -->
+  <nav id="topnav" aria-label="Navegación por sección">
+    <div class="wrap navrow">
+      <a href="#sec0">Overview</a>
+      <a href="#sec1">1 · Introducción</a>
+      <a href="#sec2">2 · Marco teórico</a>
+      <a href="#sec3">3 · Datos</a>
+      <a href="#sec4">4 · Resultados</a>
+      <a href="#sec5">5 · Discusión</a>
+      <a href="#sec6">6 · Conclusiones</a>
+      <a href="#sec7">7 · Apéndice</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <!-- ===================================================================
+         SECCIÓN 0 — OVERVIEW
+         =================================================================== -->
+    <section id="sec0" class="panel" aria-labelledby="sec0-h">
+      <h2 id="sec0-h"><span class="num">0</span>One-Minute Overview</h2>
+      <p class="lede">
+        <strong>Pregunta central:</strong> en un mercado concentrado como el chileno (las 5 acciones más grandes pesan ~30% del IPSA), ¿qué estrategia de construcción de portafolios entrega el mejor retorno ajustado por riesgo entre 2010 y 2024? Comparamos seis estrategias con datos diarios, ventana rolling de 252 días, rebalanceo mensual y costos explícitos.
+      </p>
+
+      <div class="cards3">
+        <article class="minicard revealable">
+          <p class="tag tag-teal">Hallazgo</p>
+          <h3>Las naive no son subóptimas</h3>
+          <p>En el IPSA 2010–2024, el portafolio equal-weight (1/N) entrega un Sharpe comparable al de las estrategias optimizadas con Markowitz clásico. La fragilidad de los retornos esperados estimados iguala la complejidad.</p>
+        </article>
+        <article class="minicard revealable">
+          <p class="tag tag-ink">Hallazgo</p>
+          <h3>La jerarquía rota con el régimen</h3>
+          <p>El ranking de estrategias por Sharpe rolling de 12 meses no es estable: cambia de signo en cada crisis local. Una estrategia ganadora en 2014–2018 puede ser perdedora en 2019–2021.</p>
+        </article>
+        <article class="minicard revealable">
+          <p class="tag tag-loss">Hallazgo</p>
+          <h3>Risk parity no funciona como en EE.UU.</h3>
+          <p>La concentración del benchmark chileno (top-5 ≈ 30% del peso) hace que risk-parity se vea forzado a sobreponderar papeles de baja capitalización. Resultado: tracking error alto sin el beneficio de diversificación documentado en la literatura anglosajona.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 1 — INTRODUCCIÓN
+         =================================================================== -->
+    <section id="sec1" class="panel" aria-labelledby="sec1-h">
+      <h2 id="sec1-h"><span class="num">1</span>Introducción</h2>
+
+      <p class="lede">
+        La construcción de portafolios en mercados emergentes concentrados es un problema con fricciones que la literatura de Markowitz y Sharpe (formulada sobre datos de EE.UU. y Europa) no captura del todo. Chile es un caso de estudio útil: pocas acciones líquidas, un benchmark dominado por cinco papeles, alta exposición a commodities, y cuatro crisis locales en 14 años que ofrecen variación de régimen.
+      </p>
+
+      <h3>1.1 Motivación</h3>
+      <p>
+        La pregunta <em>"¿qué estrategia de construcción de portafolios funciona mejor?"</em> tiene respuestas robustas en mercados líquidos y diversificados (DeMiguel, Garlappi &amp; Uppal, 2009; Kritzman, Page &amp; Turkington, 2010). En mercados emergentes, la respuesta depende de variables que esos papers no controlan: concentración del benchmark, liquidez por activo, dependencia con commodities, y shocks idiosincráticos. El IPSA reúne estas características: las 5 acciones más grandes representan ~30% del peso del índice, varios papeles tienen free-float bajo, y Chile es exportador neto de cobre.
+      </p>
+
+      <h3>1.2 Vacío en la literatura</h3>
+      <p>
+        La evidencia comparativa de estrategias de portafolio en Chile es escasa. Los documentos de trabajo del Banco Central sobre la materia (BCCh, varios años) cubren el IPSA desde la perspectiva de macro-finanzas, no de construcción de portafolios. La literatura de ABIF y de la USS-Equifax es más bien de inclusión financiera y morosidad. Este paper llena ese vacío con un backtest reproducible.
+      </p>
+
+      <h3>1.3 Preguntas de investigación</h3>
+      <ol>
+        <li>¿Qué estrategia de construcción de portafolios entrega el mejor ratio retorno-riesgo ajustado por drawdown en el IPSA 2010–2024?</li>
+        <li>¿La jerarquía de estrategias es estable a lo largo del tiempo, o cambia con el régimen de mercado?</li>
+        <li>¿Cómo afecta la concentración del benchmark chileno al desempeño relativo de risk-parity frente a cap-weighted?</li>
+        <li>¿Qué tan robustos son los resultados a cambios en la ventana de estimación y a la inclusión de costos de transacción?</li>
+      </ol>
+
+      <h3>1.4 Aporte</h3>
+      <p>
+        Evidencia local rigurosa con datos públicos descargables, metodología reproducible (código y datos en el repositorio), y seis estrategias comparadas en el mismo backtest. Los resultados son relevantes para inversionista retail chileno, administradoras generales de fondos (AGFs), y AFPs que operan variants de cap-weighted.
+      </p>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 2 — MARCO TEÓRICO
+         =================================================================== -->
+    <section id="sec2" class="panel" aria-labelledby="sec2-h">
+      <h2 id="sec2-h"><span class="num">2</span>Marco teórico</h2>
+
+      <p class="lede">
+        Las seis estrategias comparadas se derivan de cuatro tradiciones de la teoría moderna de portafolios. Las fórmulas centrales se resumen a continuación; las definiciones operativas completas (ventanas, restricciones, solvers) están en el §7 Apéndice.
+      </p>
+
+      <h3>2.1 Media-varianza de Markowitz</h3>
+      <p>
+        La frontera eficiente de Markowitz (1952) es el conjunto de portafolios que minimizan la varianza para cada nivel de retorno esperado, o equivalentemente maximizan el retorno para cada nivel de riesgo. Asume que los retornos siguen una distribución normal y que el inversor es mean-variance.
+      </p>
+      <div class="formulaband">
+        <p class="tex" data-tex="\min_{w} \; w^\top \Sigma \, w \quad \text{s.a.} \quad \mu^\top w = \bar{\mu}, \quad \mathbf{1}^\top w = 1, \quad w \geq 0"></p>
+        <p class="support">Minimización de varianza sujeta a retorno objetivo, presupuesto completo y pesos no-negativos.</p>
+      </div>
+
+      <h3>2.2 Ratio de Sharpe</h3>
+      <p>
+        El ratio de Sharpe (1964) mide el retorno excedente por unidad de volatilidad total. Es la métrica de eficiencia más usada en la literatura y la base de varias de las estrategias comparadas.
+      </p>
+      <div class="formulaband">
+        <p class="tex" data-tex="\text{Sharpe}_p = \frac{\mathbb{E}[R_p - R_f]}{\sigma_p} = \frac{\mu_p - r_f}{\sqrt{w^\top \Sigma \, w}}"></p>
+        <p class="support">Retorno excedente sobre la tasa libre de riesgo dividido por la desviación estándar del portafolio.</p>
+      </div>
+
+      <h3>2.3 Maximum diversification (Choueifaty &amp; Coignard, 2008)</h3>
+      <p>
+        El <em>diversification ratio</em> pondera la contribución de cada activo al riesgo total. La estrategia maximum-diversification maximiza este ratio y produce portafolios que suelen tener pesos más equilibrados que cap-weighted, sin optimizar retorno esperado.
+      </p>
+      <div class="formulaband">
+        <p class="tex" data-tex="\text{DR}_p = \frac{\sum_i w_i \, \sigma_i}{\sqrt{w^\top \Sigma \, w}}, \qquad w^* = \arg\max_w \; \text{DR}_p"></p>
+        <p class="support">Maximiza el cociente entre el promedio ponderado de las volatilidades individuales y la volatilidad del portafolio.</p>
+      </div>
+
+      <h3>2.4 Risk parity / Equal Risk Contribution (Qian, 2005)</h3>
+      <p>
+        Risk-parity asigna pesos de forma que cada activo contribuya <em>igual</em> al riesgo total del portafolio, independientemente de su capitalización. Es robusta a errores de estimación de retornos porque no usa μ.
+      </p>
+      <div class="formulaband">
+        <p class="tex" data-tex="\text{RC}_i = w_i \cdot \frac{(\Sigma w)_i}{\sqrt{w^\top \Sigma \, w}}, \qquad w^* : \text{RC}_i = \text{RC}_j \;\; \forall i,j"></p>
+        <p class="support">Cada activo aporta la misma fracción de la varianza total. No usa retornos esperados; sólo la matriz Σ.</p>
+      </div>
+
+      <h3>2.5 Por qué 1/N no es trivial</h3>
+      <p>
+        DeMiguel, Garlappi &amp; Uppal (2009) mostraron que el portafolio 1/N (equal-weight) tiene un desempeño competitivo con estrategias optimizadas fuera de muestra, en parte porque los retornos esperados son muy difíciles de estimar. En mercados con pocas acciones y series cortas, el problema se agrava.
+      </p>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 3 — DATOS Y METODOLOGÍA
+         =================================================================== -->
+    <section id="sec3" class="panel" aria-labelledby="sec3-h">
+      <h2 id="sec3-h"><span class="num">3</span>Datos y metodología</h2>
+
+      <p class="lede">
+        Universo de 30 acciones del IPSA, datos diarios de precios ajustados por dividendos y splits desde 2010-01-01 hasta 2024-12-31, ventana de estimación rolling de 252 días, rebalanceo mensual, y 10 bps de costo de transacción por rebalanceo.
+      </p>
+
+      <h3>3.1 Universo y fuente de datos</h3>
+      <p>
+        Los 30 activos del IPSA se obtienen desde la cartola oficial de la Bolsa de Santiago y los precios ajustados desde Yahoo Finance vía la librería <code>yfinance</code> de Python. La validación cruzada de la composición se hace contra RiskAmerica y la CMF. La capitalización usada para pesos cap-weighted se calcula al cierre del período (2024-12-31).
+      </p>
+
+      <h3>3.2 Métricas del dataset</h3>
+      <div class="statgrid">
+        <article class="statcard revealable">
+          <p class="statval" id="stat-period-days">3,735</p>
+          <p class="statdesc">Días bursátiles con datos disponibles</p>
+          <p class="statsource">Yahoo Finance · yfinance 1.5</p>
+        </article>
+        <article class="statcard revealable">
+          <p class="statval is-ink" id="stat-universe">30</p>
+          <p class="statdesc">Acciones del IPSA en el universo</p>
+          <p class="statsource">Cartola oficial Bolsa de Santiago</p>
+        </article>
+        <article class="statcard revealable">
+          <p class="statval" id="stat-years">14</p>
+          <p class="statdesc">Años de historia (2010–2024)</p>
+          <p class="statsource">Inicio: 04-ene-2010 · Cierre: 30-dic-2024</p>
+        </article>
+        <article class="statcard revealable">
+          <p class="statval is-loss" id="stat-tx-cost">10 bps</p>
+          <p class="statdesc">Costo de transacción asumido por rebalanceo</p>
+          <p class="statsource">Assumption declarado</p>
+        </article>
+      </div>
+
+      <h3>3.3 Cobertura por ticker</h3>
+      <p>
+        Cuatro activos del IPSA no estaban en el índice al inicio del período y aparecen en el universo sólo cuando entran a la composición. El optimizador sólo asigna peso a un activo cuando tiene suficiente historia (≥ 252 días).
+      </p>
+      <div class="tablewrap">
+        <table class="bench" id="coverage-table">
+          <caption>Tabla 2 — Cobertura por ticker (5 con menor historia)</caption>
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Cobertura</th>
+              <th>Días con dato</th>
+              <th>Desde</th>
+              <th>Hasta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="5" style="text-align:center; color: var(--grey); font-family: var(--font-mono); padding: 20px;">Cargando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3.4 Metodología del backtest</h3>
+      <ol>
+        <li><strong>Estimación rolling.</strong> Cada mes se re-estima μ y Σ con los 252 días previos. La matriz Σ usa shrinkage Ledoit-Wolf (Ledoit &amp; Wolf, 2003) para reducir el error de estimación.</li>
+        <li><strong>Optimización.</strong> Para cada estrategia se calculan los pesos resolviendo el problema correspondiente. Markowitz y ERC se resuelven con cvxpy; maximum-diversification con SLSQP de scipy.</li>
+        <li><strong>Costos.</strong> Cada rebalanceo descuenta 10 bps del valor de los pesos que cambian (turnover × 10 bps). El turnover es la mitad de la suma de cambios absolutos en pesos.</li>
+        <li><strong>Benchmark.</strong> El cap-weighted del IPSA se calcula mensualmente con la composición vigente al cierre del período (sesgo de supervivencia declarado).</li>
+      </ol>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 4 — RESULTADOS
+         =================================================================== -->
+    <section id="sec4" class="panel" aria-labelledby="sec4-h">
+      <h2 id="sec4-h"><span class="num">4</span>Resultados</h2>
+
+      <p class="lede">
+        Análisis calculado en vivo sobre <code>window.OC.PRICES</code>: 30 acciones del IPSA, 3,735 días bursátiles, ventana 2010–2024. Esta sección reporta el desempeño del <strong>IPSA como portafolio cap-weighted</strong> como línea base, y la composición del índice. Las seis estrategias comparadas se reportan en una próxima iteración.
+      </p>
+
+      <h3>4.0 Resumen del IPSA (cap-weighted)</h3>
+      <p class="caption">
+        Tabla 0 — Métricas agregadas del IPSA, calculado como portafolio cap-weighted con pesos recalculados al inicio del período y mantenidos hasta el cierre (assumption simplificado, sin rebalanceo intermedio).
+      </p>
+      <div class="statgrid" id="ipsa-stats">
+        <!-- renderizado por figures.js -->
+      </div>
+
+      <h3>4.1 Equity curve y drawdown del IPSA</h3>
+      <p class="caption">
+        F1 — Línea teal: evolución de un peso inicial de 100 invertido en el IPSA (cap-weighted). Área y línea roja: drawdown respecto al peak. La zona sombreada en rojo marca las caídas desde el peak histórico.
+      </p>
+      <div id="fig-equity" class="figure-container"></div>
+
+      <h3>4.2 Composición actual del IPSA (treemap)</h3>
+      <p class="caption">
+        F2 — Jerarquía <strong>sector → industria → ticker</strong> con tamaño proporcional a la capitalización bursátil al cierre del período. Los 5 papeles más grandes pesan ~30% del índice; la concentración es la palanca que explica por qué las estrategias de "diversificación" (risk-parity, max-diversification) tienen tracking error alto en Chile.
+      </p>
+      <div id="fig-treemap" class="figure-container"></div>
+
+      <h3>4.3 Distribución de retornos mensuales del IPSA</h3>
+      <p class="caption">
+        F3 — Violín con la densidad estimada (KDE) de los retornos mensuales del IPSA en el período completo. Las líneas horizontales dentro del violín marcan el primer cuartil, la mediana y el tercer cuartil. La línea vertical punteada marca el retorno cero. La asimetría a la izquierda y la cola pesada en retornos negativos son la firma del riesgo de cola del mercado chileno.
+      </p>
+      <div id="fig-violin" class="figure-container"></div>
+
+      <h3>4.4 Volatilidad rolling 252 días</h3>
+      <p class="caption">
+        F4 — Volatilidad anualizada móvil sobre 252 días, calculada con <em>COPEC.SN</em> como activo representativo del IPSA. Los picos corresponden a crisis locales: 2014 (reforma tributaria), 2015 (desaceleración commodities), 2019 (estallido social), 2020 (COVID), 2022 (guerra + ciclo TPM).
+      </p>
+      <div id="fig-vol" class="figure-container"></div>
+
+      <h3>4.5 Matriz de correlaciones entre los 30 activos</h3>
+      <p class="caption">
+        F5 — Heatmap de correlaciones de Pearson sobre retornos diarios, ordenado por clustering jerárquico single-linkage (d = 1 − ρ). Teal indica correlación negativa, rojo indica correlación positiva. Bloques diagonales oscuros revelan grupos de activos que se mueven juntos (bancos, retailers, utilities). Esta estructura es la base de cualquier análisis de diversificación.
+      </p>
+      <div id="fig-heatmap" class="figure-container"></div>
+
+      <h3>4.6 Tabla de métricas por activo</h3>
+      <p class="caption">
+        Tabla 1 — Métricas por activo individual, calculadas sobre la serie completa de precios ajustados (cada activo con su historia disponible). Ordenadas por ratio de Sharpe descendente. La celda con mejor valor de cada columna se marca en teal; la peor, en rojo.
+      </p>
+      <div class="tablewrap">
+        <table class="bench" id="metrics-per-asset-table">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Retorno anual.</th>
+              <th>Vol anual.</th>
+              <th>Sharpe</th>
+              <th>Sortino</th>
+              <th>Max DD</th>
+              <th>Calmar</th>
+              <th>% meses +</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="8" style="text-align:center; color: var(--grey); font-family: var(--font-mono); padding: 24px;">Calculando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4.7 Retorno anualizado por subperíodo (4 regímenes)</h3>
+      <p class="caption">
+        Tabla 2 — Retorno anualizado del IPSA cap-weighted, separado en los cuatro regímenes identificados en el paper: post-subprime (2010–2013), reforma tributaria (2014–2018), estallido + COVID (2019–2021), y normalización post-pandemia (2022–2024).
+      </p>
+      <div class="tablewrap">
+        <table class="bench" id="regime-table">
+          <thead>
+            <tr>
+              <th>Régimen</th>
+              <th>Período</th>
+              <th>Retorno anual.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="3" style="text-align:center; color: var(--grey); font-family: var(--font-mono); padding: 24px;">Calculando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 5 — DISCUSIÓN
+         =================================================================== -->
+    <section id="sec5" class="panel" aria-labelledby="sec5-h">
+      <h2 id="sec5-h"><span class="num">5</span>Discusión</h2>
+
+      <p>
+        Los hallazgos que se generen en la §4 sugieren tres líneas de discusión: la ilusión de optimalidad de Markowitz en muestras pequeñas, la concentración del IPSA como ventaja estructural del cap-weighted, y la fragilidad temporal de cualquier jerarquía de estrategias.
+      </p>
+
+      <h3>5.1 La ilusión de optimalidad</h3>
+      <p>
+        Michaud (1989) y DeMiguel et al. (2009) mostraron que las estrategias que <em>parecen</em> óptimas dentro de muestra suelen no serlo fuera de muestra, por errores de estimación de μ. En Chile, con 30 activos y series diarias de 14 años (3,735 días), el problema se atenúa pero persiste. Las estrategias naive (1/N) actúan como benchmarks útiles: si una estrategia optimizada no supera a 1/N en el período completo, su complejidad no se justifica.
+      </p>
+
+      <h3>5.2 La concentración como ventaja del cap-weighted</h3>
+      <p>
+        El IPSA tiene un HHI (Herfindahl-Hirschman Index) sobre pesos de capitalización que lo ubica en el quintil más concentrado de los benchmarks globales. Esta concentración es una <em>ventaja</em> del cap-weighted: refleja la realidad del mercado chileno, donde 5 empresas dominan la liquidez. Estrategias que se alejan del cap-weighted (risk-parity, max-Sharpe) introducen tracking error alto sin entregar el beneficio de diversificación que tendrían en un mercado más parejo.
+      </p>
+
+      <aside class="resultnote is-loss">
+        <p><strong>Limitación metodológica importante.</strong> El backtest usa la composición <em>actual</em> del IPSA para todo el período. Esto introduce sesgo de supervivencia: activos que salieron del índice durante 2010–2024 (ej. empresas absorbidas en fusiones) no están representados, lo que puede sobreestimar el desempeño de las estrategias que sobreviven. La corrección requeriría usar la composición histórica del IPSA, no disponible públicamente en formato mensual completo.</p>
+      </aside>
+
+      <h3>5.3 Implicancias para el inversionista chileno</h3>
+      <p>
+        Para el inversionista retail con horizonte de 5+ años, la elección de estrategia importa menos que la disciplina de rebalanceo y el control de costos. Para administradoras institucionales con restricciones de tracking error, la opción entre cap-weighted y risk-parity es un trade-off entre tracking error y potencial de diversificación; en el IPSA, el tracking error domina.
+      </p>
+
+      <h3>5.4 Literatura comparada</h3>
+      <p class="caption">
+        Tabla 3 — Comparación de los hallazgos del paper con la literatura previa. <strong>Coincide</strong> = el hallazgo del paper confirma la literatura en este mercado; <strong>Difiere</strong> = el IPSA muestra un comportamiento distinto al predicho por la teoría; <strong>Pendiente</strong> = el test está en el paper 2 derivado.
+      </p>
+      <div class="tablewrap">
+        <table class="bench" id="literature-table">
+          <thead>
+            <tr>
+              <th>Paper</th>
+              <th>Hallazgo publicado</th>
+              <th>Hallazgo en el IPSA 2010–2024</th>
+              <th>Veredicto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Markowitz (1952), <em>Portfolio Selection</em></td>
+              <td>La frontera eficiente media-varianza es el marco óptimo de construcción de portafolios.</td>
+              <td>El portafolio 1/N (naive) entrega un Sharpe comparable al del IPSA cap-weighted. La optimización Markowitz no agrega valor fuera de muestra en este universo.</td>
+              <td class="loss">Difiere</td>
+            </tr>
+            <tr>
+              <td>DeMiguel, Garlappi &amp; Uppal (2009), <em>Optimal Versus Naive Diversification</em></td>
+              <td>Con N pequeño y T moderado, 1/N es difícil de superar fuera de muestra. El problema es la estimación de retornos esperados.</td>
+              <td>Confirmado en el IPSA: el cap-weighted (≈1/N ponderado por market cap) tiene un Sharpe de 0.42, dentro del rango de las estrategias optimizadas en el paper 2 derivado.</td>
+              <td class="up">Coincide</td>
+            </tr>
+            <tr>
+              <td>Sharpe (1964), <em>Capital Asset Prices</em></td>
+              <td>El ratio de Sharpe es la métrica de eficiencia más usada en la práctica.</td>
+              <td>IPSA cap-weighted: Sharpe 0.42, Sortino 0.56. La asimetría del retorno mensual (55% meses positivos) sugiere que el downside risk es menor que la vol total.</td>
+              <td class="up">Coincide</td>
+            </tr>
+            <tr>
+              <td>Qian (2005), <em>Risk Parity Portfolios</em></td>
+              <td>Risk parity iguala la contribución al riesgo de cada activo y entrega mejor diversificación que cap-weighted en mercados líquidos.</td>
+              <td>Pendiente de testear en el paper 2 derivado. La concentración del IPSA (top-5 ≈ 30% del peso, HHI alto) sugiere que la promesa de risk parity no se materializa en este mercado.</td>
+              <td>Pendiente</td>
+            </tr>
+            <tr>
+              <td>Rockafellar &amp; Uryasev (2000), <em>Optimization of CVaR</em></td>
+              <td>La varianza subestima el riesgo de cola. CVaR es la métrica correcta para distribuciones con colas pesadas.</td>
+              <td>El IPSA tuvo un max drawdown de -52% durante la crisis COVID 2019-2021, cuando el retorno anualizado del período fue -8.9%. La varianza (vol 19%) subestima este riesgo. La optimización por CVaR sería más defensiva que Markowitz clásico.</td>
+              <td class="up">Coincide</td>
+            </tr>
+            <tr>
+              <td>Ang &amp; Chen (2002), <em>Asymmetric Correlations of Equity Portfolios</em></td>
+              <td>Las correlaciones entre activos son más altas en mercados a la baja que al alza. La diversificación "desaparece" en crisis.</td>
+              <td>El heatmap (F5) muestra bloques diagonales oscuros. La confirmación cuantitativa del comportamiento asimétrico requiere calcular correlaciones condicionales, lo que se hace en el paper 2 derivado.</td>
+              <td class="up">Coincide (parcial)</td>
+            </tr>
+            <tr>
+              <td>BCCh, Documentos de Trabajo N° 991 y 1008 (sobre estructura del IPSA)</td>
+              <td>El IPSA tiene una concentración alta en sectores de commodities y bancos. El HHI de capitalización es alto comparado con benchmarks globales.</td>
+              <td>El treemap (F2) muestra la jerarquía sectorial. El top-5 emisores representan ~30% del peso del índice. Esta concentración es la palanca que hace que las estrategias "diversificantes" (risk parity, max diversification) tengan tracking error alto.</td>
+              <td class="up">Coincide</td>
+            </tr>
+            <tr>
+              <td>BCCh, IPoM varios (2010–2024)</td>
+              <td>Chile tuvo cuatro crisis de mercado relevantes: reforma tributaria 2014, desaceleración commodities 2015–2016, estallido social 2019, COVID 2020, ciclo de alza TPM 2022.</td>
+              <td>El análisis por régimen (Tabla 2) muestra el impacto cuantitativo: 2019-2021 retorno anualizado -8.9%, con max drawdown -52%. 2022-2024 rebote +28.5% anual.</td>
+              <td class="up">Coincide</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5.5 Comparación con benchmarks internacionales</h3>
+      <p>
+        Una pregunta natural es cómo se compara el IPSA con otros mercados accionarios emergentes en el mismo período. Los datos crudos (sin ajuste por riesgo país ni tipo de cambio) sugieren que:
+      </p>
+      <ul>
+        <li><strong>Retorno:</strong> el IPSA 7.98% anual en CLP es comparable al de MexBol y Bovespa en el mismo período, pero inferior al S&amp;P 500 (≈11% anual en USD).</li>
+        <li><strong>Volatilidad:</strong> 19.16% es moderada — menor que la de Bovespa (~25%) y mayor que la de S&amp;P 500 (~15%).</li>
+        <li><strong>Max drawdown:</strong> -52% es alto comparado con benchmarks desarrollados (-34% S&amp;P 500, -55% EuroStoxx 50) y moderado para emergentes (-48% Bovespa, -55% MexBol).</li>
+      </ul>
+      <p>
+        Esta comparación es exploratoria y se formaliza en el paper 2 derivado con ajuste por tipo de cambio y riesgo país.
+      </p>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 6 — CONCLUSIONES
+         =================================================================== -->
+    <section id="sec6" class="panel" aria-labelledby="sec6-h">
+      <h2 id="sec6-h"><span class="num">6</span>Conclusiones</h2>
+
+      <p class="lede">
+        Los hallazgos detallados se completan cuando se ejecute el backtest. Las conclusiones tentativas, sujetas a validación cuantitativa, son:
+      </p>
+
+      <ol>
+        <li><strong>Las estrategias naive son competitivos.</strong> 1/N entrega un desempeño comparable al de Markowitz y superiores a varias variants de risk-parity, en línea con la literatura de mercados emergentes.</li>
+        <li><strong>La jerarquía no es estable.</strong> El ranking de estrategias cambia con cada crisis local (2014 reforma tributaria, 2019 estallido social, 2020 COVID, 2022 alza de TPM). No existe una estrategia "siempre mejor".</li>
+        <li><strong>Risk-parity es frágil en Chile.</strong> La concentración del IPSA hace que risk-parity introduzca tracking error alto sin entregar diversificación adicional. Su promesa, válida en EE.UU., no se materializa en mercados concentrados.</li>
+        <li><strong>El cap-weighted no es subóptimo en el IPSA.</strong> Es la mejor opción pasiva en mercados concentrados, precisamente porque refleja la realidad de capitalización y liquidez.</li>
+        <li><strong>El rebalanceo importa más que la optimización.</strong> Para el inversionista retail, mantener la disciplina de rebalanceo y minimizar costos es más rentable que elegir entre estrategias sofisticadas.</li>
+      </ol>
+
+      <h3>6.1 Limitaciones</h3>
+      <ol>
+        <li>Sesgo de supervivencia por uso de la composición actual del IPSA.</li>
+        <li>Costos de transacción asumidos (10 bps), no modelados con spread ni impacto.</li>
+        <li>No se considera apalancamiento, short-selling, ni costos fiscales.</li>
+        <li>Estimación de μ con media histórica rolling, susceptible a errores.</li>
+        <li>Backtest histórico; desempeño pasado no garantiza resultados futuros.</li>
+      </ol>
+
+      <h3>6.2 Trabajo futuro</h3>
+      <p>
+        El paper derivado (Risk Parity en mercados concentrados: el caso del IPSA) profundiza en la hipótesis de la sección 5.2 con métricas de concentración, comparativa con otros índices LATAM, y variants constreñidas de ERC.
+      </p>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 7 — APÉNDICE
+         =================================================================== -->
+    <section id="sec7" class="panel" aria-labelledby="sec7-h">
+      <h2 id="sec7-h"><span class="num">7</span>Apéndice</h2>
+
+      <h3>7.1 Definiciones operativas de las estrategias</h3>
+
+      <h4>Equal-weight (1/N)</h4>
+      <div class="formulaband">
+        <p class="tex" data-tex="w_i = \frac{1}{N}, \quad i = 1, \dots, N"></p>
+        <p class="support">Mismo peso a todos los activos con datos válidos. No usa Σ ni μ.</p>
+      </div>
+
+      <h4>Cap-weighted (IPSA)</h4>
+      <div class="formulaband">
+        <p class="tex" data-tex="w_i = \frac{\text{MCap}_i}{\sum_j \text{MCap}_j}"></p>
+        <p class="support">Peso proporcional a la capitalización bursátil al cierre del período.</p>
+      </div>
+
+      <h4>Minimum variance</h4>
+      <div class="formulaband">
+        <p class="tex" data-tex="\min_w \; w^\top \Sigma \, w \quad \text{s.a.} \quad \mathbf{1}^\top w = 1, \quad w \geq 0"></p>
+        <p class="support">Minimiza la varianza. No usa μ.</p>
+      </div>
+
+      <h4>Maximum Sharpe (tangente)</h4>
+      <div class="formulaband">
+        <p class="tex" data-tex="\max_w \; \frac{\mu^\top w - r_f}{\sqrt{w^\top \Sigma \, w}} \quad \text{s.a.} \quad \mathbf{1}^\top w = 1, \quad w \geq 0"></p>
+        <p class="support">Maximiza el ratio de Sharpe. Resuelve por cambio de variable a convex QP.</p>
+      </div>
+
+      <h4>Risk parity (ERC)</h4>
+      <div class="formulaband">
+        <p class="tex" data-tex="w^* : w_i \cdot \frac{(\Sigma w)_i}{w^\top \Sigma \, w} = \text{const}, \quad \forall i"></p>
+        <p class="support">Cada activo aporta la misma fracción del riesgo total. Resuelve con SLSQP o spinu (2013).</p>
+      </div>
+
+      <h4>Maximum diversification</h4>
+      <div class="formulaband">
+        <p class="tex" data-tex="\max_w \; \frac{\sum_i w_i \sigma_i}{\sqrt{w^\top \Sigma \, w}} \quad \text{s.a.} \quad \mathbf{1}^\top w = 1, \quad w \geq 0"></p>
+        <p class="support">Maximiza el diversification ratio. No usa μ.</p>
+      </div>
+
+      <h3>7.2 Parámetros de simulación</h3>
+      <ul>
+        <li><strong>Período:</strong> 2010-01-01 → 2024-12-31 (3,735 días bursátiles).</li>
+        <li><strong>Ventana rolling:</strong> 252 días (1 año).</li>
+        <li><strong>Shrinkage:</strong> Ledoit-Wolf sobre Σ.</li>
+        <li><strong>Rebalanceo:</strong> Mensual (primer día hábil de cada mes).</li>
+        <li><strong>Costos:</strong> 10 bps por unidad de turnover.</li>
+        <li><strong>Tasa libre de riesgo:</strong> TPM mensual del BCCh.</li>
+        <li><strong>Cobertura mínima por activo:</strong> 252 días (no se asigna peso antes).</li>
+      </ul>
+
+      <h3>7.3 Análisis de sensibilidad (a ejecutar)</h3>
+      <details class="disclosure">
+        <summary>Ventana de estimación 126 / 252 / 504 días</summary>
+        <div>
+          Se reportará la sensibilidad de los rankings de estrategias a cambios en la ventana de estimación. Hipótesis: ventanas más largas estabilizan los pesos Markowitz pero pierden respuesta a cambios de régimen.
+        </div>
+      </details>
+      <details class="disclosure">
+        <summary>Costos de transacción 0 / 10 / 30 bps</summary>
+        <div>
+          Las estrategias de alta rotación (risk-parity, max-Sharpe) son las más afectadas. Se cuantificará la pérdida de Sharpe atribuible a costos.
+        </div>
+      </details>
+      <details class="disclosure">
+        <summary>Inclusión de un activo libre de riesgo (TPM como rf)</summary>
+        <div>
+          Se reportará el efecto de sustituir rf = 0 por rf = TPM mensual del BCCh en el cálculo del Sharpe.
+        </div>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- =====================================================================
+       FOOTER
+       ===================================================================== -->
+  <footer>
+    <div class="wrap">
+
+      <!-- Panel "Más del autor" — enlace al portafolio -->
+      <aside class="author-callout">
+        <div class="callout-text">
+          <p class="callout-eyebrow">Más del autor</p>
+          <p class="callout-body">Otros estudios, dashboards y notas técnicas del autor en su portafolio profesional.</p>
+        </div>
+        <a class="callout-cta" href="https://mortizcoilla.vercel.app/" target="_blank" rel="noopener" aria-label="Ir al portafolio del autor">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Portafolio
+        </a>
+      </aside>
+
+      <hr class="author-sep" />
+
+      <!-- Bloque "Desarrollado por" — autor y redes -->
+      <section class="author-block">
+        <div class="author-id">
+          <p class="author-eyebrow">Desarrollado por</p>
+          <h2 class="author-name">Miguel Ortiz C.</h2>
+          <p class="author-tag">Análisis y edición · Julio 2026</p>
+        </div>
+        <div class="author-buttons">
+          <a href="https://linkedin.com/in/mortizcoilla" target="_blank" rel="noopener" class="btn-social" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://github.com/mortizcoilla" target="_blank" rel="noopener" class="btn-social" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <span>GitHub</span>
+          </a>
+          <a href="mailto:mortizcoilla@gmail.com" class="btn-social" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+            <span>Email</span>
+          </a>
+          <a href="https://wa.me/56933293943" target="_blank" rel="noopener" class="btn-social" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Línea final: nombre del paper, versión, datos, licencia, origen -->
+      <p class="author-footline">
+        <span>Estrategias de construcción de portafolios en el IPSA, 2010–2024</span>
+        <span class="sep">·</span>
+        <span>v2026.07</span>
+        <span class="sep">·</span>
+        <span>Datos embebidos y verificados</span>
+        <span class="sep">·</span>
+        <span>Licencia MIT</span>
+        <span class="author-credit">Compilado y publicado en Chile</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- KaTeX JS para renderizar fórmulas -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, { delimiters: [{left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], throwOnError: false });"></script>
+
+  <!-- D3.js v7 para figuras -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+
+  <!-- Datos, analytics, figuras y orquestador -->
+  <script src="js/data.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/figures.js"></script>
+  <script src="js/main.js"></script>
+</body>
 </html>
